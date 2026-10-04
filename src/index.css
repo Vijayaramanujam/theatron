@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800;900&display=swap');
 @import 'tailwindcss';
 
 :root {
-  --background: #000000;
-  --surface: #0a0a0a;
-  --accent-red: #dc2626;
+  --background: #040203;
+  --surface: #0f0709;
+  --metallic-red: #e11d48;
+  --metallic-red-dark: #800020;
+  --metallic-red-glow: rgba(225, 29, 72, 0.4);
 }
 
 * {
@@ -18,17 +20,73 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: var(--background);
   color: #ffffff;
   -webkit-font-smoothing: antialiased;
 }
 
-@keyframes pulseSlow {
-  0%, 100% { opacity: 0.25; }
-  50% { opacity: 0.15; }
+h1, h2, h3, h4, .font-display {
+  font-family: 'Syne', sans-serif;
 }
 
-.animate-pulse-slow {
-  animation: pulseSlow 6s ease-in-out infinite;
+/* Hide native scrollbar completely */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Sleek Dark Metallic Red Scrollbar for Modal */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0305;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #be123c;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f43f5e;
+}
+
+/* Metallic Red Text Gradient */
+.text-metallic-red {
+  background: linear-gradient(135deg, #ffffff 0%, #f43f5e 40%, #e11d48 70%, #9f1239 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Metallic Red Glass Card Border & Glow */
+.metallic-card {
+  background: linear-gradient(180deg, #12090b 0%, #050505 100%);
+  border: 1px solid rgba(225, 29, 72, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.metallic-card:hover {
+  border-color: rgba(225, 29, 72, 0.8);
+  box-shadow: 0 10px 30px rgba(225, 29, 72, 0.35), 0 0 15px rgba(225, 29, 72, 0.2);
+}
+
+/* Metallic Red Button */
+.btn-metallic {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 50%, #800020 100%);
+  box-shadow: 0 4px 20px rgba(225, 29, 72, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-metallic:hover {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 50%, #9f1239 100%);
+  box-shadow: 0 6px 25px rgba(225, 29, 72, 0.6);
+  transform: translateY(-2px);
 }
