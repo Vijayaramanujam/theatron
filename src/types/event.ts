@@ -36,6 +36,7 @@ export interface EventData {
   description: string;
   contacts: Contact[];
   registration: RegistrationConfig;
-  icon: string;
-  gradient: string;
+  image?: string;
+  icon?: string;
+  gradient?: string;
 }

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#090d16"/>
+  <!-- Stage Curtains & Lights -->
+  <polygon points="0,0 800,0 700,500 100,500" fill="#7f1d1d" opacity="0.4"/>
+  <polygon points="400,0 150,500 650,500" fill="#fbbf24" opacity="0.25"/>
+  <!-- Drama Masks -->
+  <!-- Comedy Mask -->
+  <path d="M 330 200 C 330 140, 410 140, 410 200 C 410 270, 330 270, 330 200 Z" fill="#fef08a" stroke="#000" stroke-width="6"/>
+  <circle cx="355" cy="185" r="10" fill="#000"/>
+  <circle cx="385" cy="185" r="10" fill="#000"/>
+  <path d="M 355 220 Q 370 245 385 220" fill="none" stroke="#000" stroke-width="6"/>
+  <!-- Tragedy Mask -->
+  <path d="M 400 240 C 400 180, 480 180, 480 240 C 480 310, 400 310, 400 240 Z" fill="#93c5fd" stroke="#000" stroke-width="6"/>
+  <circle cx="425" cy="225" r="10" fill="#000"/>
+  <circle cx="455" cy="225" r="10" fill="#000"/>
+  <path d="M 425 270 Q 440 245 455 270" fill="none" stroke="#000" stroke-width="6"/>
+  
+  <text x="400" y="420" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="44" fill="#ffffff" text-anchor="middle" letter-spacing="6">STAGE PLAY</text>
+  <text x="400" y="460" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="18" fill="#ef4444" text-anchor="middle" letter-spacing="4">SHOW YOUR TALENT</text>
+</svg>

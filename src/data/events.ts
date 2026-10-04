@@ -14,8 +14,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    icon: '🎬',
-    gradient: 'from-amber-900/20 to-transparent'
+    image: '/images/events/quiz-corn.svg',
+    gradient: 'from-amber-950/40 via-red-950/20 to-black'
   },
   {
     id: 'stills-of-soul',
@@ -36,12 +36,12 @@ export const events: EventData[] = [
           label: 'Upload Photo — Google Drive Link',
           type: 'url',
           required: true,
-          instruction: 'Ensure that the Google Drive link has appropriate viewing access'
+          instruction: 'Ensure that the Google Drive link has appropriate viewing access.'
         }
       ]
     },
-    icon: '📸',
-    gradient: 'from-blue-900/20 to-transparent'
+    image: '/images/events/stills-of-soul.svg',
+    gradient: 'from-red-950/50 via-neutral-900 to-black'
   },
   {
     id: 'graphics-grid',
@@ -67,8 +67,8 @@ export const events: EventData[] = [
         }
       ]
     },
-    icon: '🎨',
-    gradient: 'from-purple-900/20 to-transparent'
+    image: '/images/events/graphics-grid.svg',
+    gradient: 'from-blue-950/40 via-purple-950/20 to-black'
   },
   {
     id: 'cineplus',
@@ -93,8 +93,8 @@ export const events: EventData[] = [
         }
       ]
     },
-    icon: '🎥',
-    gradient: 'from-red-900/20 to-transparent'
+    image: '/images/events/cineplus.svg',
+    gradient: 'from-amber-950/40 via-red-950/30 to-black'
   },
   {
     id: 'stage-play',
@@ -110,8 +110,8 @@ export const events: EventData[] = [
       teamBased: true,
       teamSize: { min: 1, max: 10 }
     },
-    icon: '🎭',
-    gradient: 'from-orange-900/20 to-transparent'
+    image: '/images/events/stage-play.svg',
+    gradient: 'from-red-950/50 via-zinc-900 to-black'
   },
   {
     id: 'adaptune',
@@ -126,8 +126,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    icon: '💃',
-    gradient: 'from-pink-900/20 to-transparent'
+    image: '/images/events/adaptune.svg',
+    gradient: 'from-pink-950/40 via-purple-950/20 to-black'
   },
   {
     id: 'brainstorm',
@@ -142,8 +142,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    icon: '✍️',
-    gradient: 'from-emerald-900/20 to-transparent'
+    image: '/images/events/brainstorm.svg',
+    gradient: 'from-emerald-950/40 via-teal-950/20 to-black'
   },
   {
     id: 'debate',
@@ -159,8 +159,8 @@ export const events: EventData[] = [
       teamBased: true,
       teamSize: { min: 2, max: 4, fixed: [2, 3, 4] }
     },
-    icon: '🎤',
-    gradient: 'from-cyan-900/20 to-transparent'
+    image: '/images/events/debate.svg',
+    gradient: 'from-cyan-950/40 via-slate-900 to-black'
   },
   {
     id: 'photography-workshop',
@@ -174,8 +174,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    icon: '📷',
-    gradient: 'from-slate-900/20 to-transparent'
+    image: '/images/workshops/photography.svg',
+    gradient: 'from-neutral-900 via-stone-900 to-black'
   },
   {
     id: 'vfx-and-editing',
@@ -189,8 +189,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    icon: '✂️',
-    gradient: 'from-indigo-900/20 to-transparent'
+    image: '/images/workshops/vfx-editing.svg',
+    gradient: 'from-indigo-950/40 via-purple-950/20 to-black'
   },
   {
     id: 'dance-workshop',
@@ -202,8 +202,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    icon: '🎵',
-    gradient: 'from-rose-900/20 to-transparent'
+    image: '/images/workshops/dance.svg',
+    gradient: 'from-rose-950/40 via-pink-950/20 to-black'
   },
   {
     id: 'script-writing',
@@ -218,8 +218,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    icon: '📝',
-    gradient: 'from-yellow-900/20 to-transparent'
+    image: '/images/workshops/script-writing.svg',
+    gradient: 'from-amber-950/40 via-yellow-950/20 to-black'
   },
   {
     id: 'storyboard',
@@ -234,8 +234,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    icon: '🎞️',
-    gradient: 'from-teal-900/20 to-transparent'
+    image: '/images/workshops/storyboard.svg',
+    gradient: 'from-teal-950/40 via-emerald-950/20 to-black'
   }
 ];
 
