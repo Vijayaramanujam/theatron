@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import ThreeBackground from './components/ThreeBackground';
 import Navbar from './components/Navbar';
 import SectionHeading from './components/SectionHeading';
 import CategoryFilter from './components/CategoryFilter';
@@ -16,6 +18,8 @@ export default function App() {
   const [registerEvent, setRegisterEvent] = useState<EventData | null>(null);
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   // Filter events dynamically based on Category Selector: Competitions vs Workshops
   const filteredEvents = allEventsData.filter((event) => {
     if (activeCategory === 'Competitions') {
@@ -24,6 +28,23 @@ export default function App() {
       return event.category === 'workshop';
     }
   });
+
+  // GSAP Animations on load & category change
+  useEffect(() => {
+    if (containerRef.current) {
+      gsap.fromTo(
+        containerRef.current.children,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: 'power3.out'
+        }
+      );
+    }
+  }, [activeCategory]);
 
   const handleSelectEvent = (event: EventData) => {
     setSelectedEvent(event);
@@ -37,17 +58,20 @@ export default function App() {
   };
 
   return (
-    <main className="relative bg-gradient-to-br from-black via-zinc-900 to-black text-white min-h-screen overflow-hidden font-['Space_Grotesk',sans-serif]">
-      {/* Background Radial Glow Overlays matching reference */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] pointer-events-none" />
+    <main className="relative bg-gradient-to-br from-black via-[#0d0407] to-black text-white min-h-screen overflow-hidden font-['Space_Grotesk',sans-serif]">
+      {/* Three.js Interactive 3D Metallic Red Particle Canvas */}
+      <ThreeBackground />
+
+      {/* Radial Metallic Red Glow Overlays */}
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_top_right,rgba(225,29,72,0.25),transparent_60%)] pointer-events-none z-0" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(128,0,32,0.3),transparent_70%)] pointer-events-none z-0" />
 
       {/* Navigation */}
       <Navbar />
 
       {/* EVENTS DISCOVERY SECTION - THE ENTIRE PAGE FOCUS */}
-      <section id="events" className="relative z-10 pt-28 sm:pt-32 pb-20 px-4 sm:px-6 md:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section id="events" className="relative z-10 pt-32 sm:pt-36 pb-28 px-6 sm:px-8 md:px-12">
+        <div className="max-w-7xl mx-auto space-y-12">
           {/* Header & Subtitle */}
           <SectionHeading />
 
@@ -57,18 +81,20 @@ export default function App() {
             onCategoryChange={setActiveCategory}
           />
 
-          {/* Responsive Event Grid */}
-          <EventGrid
-            events={filteredEvents}
-            onSelectEvent={handleSelectEvent}
-          />
+          {/* GSAP Animated Responsive Event Grid */}
+          <div ref={containerRef}>
+            <EventGrid
+              events={filteredEvents}
+              onSelectEvent={handleSelectEvent}
+            />
+          </div>
         </div>
       </section>
 
       {/* Footer */}
       <Footer />
 
-      {/* Event Details Modal */}
+      {/* Event Details Pop-up Modal with Spacing & Metallic Red Styling */}
       <EventModal
         event={selectedEvent}
         isOpen={isModalOpen}
