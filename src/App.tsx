@@ -70,8 +70,8 @@ export default function App() {
       <Navbar />
 
       {/* EVENTS DISCOVERY SECTION - THE ENTIRE PAGE FOCUS */}
-      <section id="events" className="relative z-10 pt-32 sm:pt-36 pb-28 px-6 sm:px-8 md:px-12">
-        <div className="max-w-7xl mx-auto space-y-12">
+      <section id="events" className="relative z-10 pt-44 sm:pt-48 md:pt-52 pb-32 px-6 sm:px-8 md:px-12">
+        <div className="max-w-7xl mx-auto space-y-16 md:space-y-20">
           {/* Header & Subtitle */}
           <SectionHeading />
 

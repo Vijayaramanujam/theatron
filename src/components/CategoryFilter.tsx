@@ -5,24 +5,26 @@ interface Props {
 
 export default function CategoryFilter({ activeCategory, onCategoryChange }: Props) {
   return (
-    <div className="flex justify-center gap-6 mb-12">
+    <div className="flex justify-center items-center gap-6 sm:gap-8 my-8 sm:my-12">
       <button
         onClick={() => onCategoryChange('Competitions')}
-        className={`px-6 py-2 rounded-full border-2 text-sm font-medium transition-all duration-300 ${
+        className={`px-7 sm:px-9 py-3 rounded-full border-2 text-sm sm:text-base font-bold tracking-wider uppercase transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg ${
           activeCategory === 'Competitions'
-            ? 'bg-red-600 border-red-600 text-white'
-            : 'border-red-600 text-red-500 hover:bg-red-600 hover:text-white'
+            ? 'bg-red-600 border-red-600 text-white shadow-red-950/50'
+            : 'border-red-600/80 text-red-500 hover:bg-red-600 hover:text-white bg-black/50'
         }`}
       >
         Competitions
       </button>
 
+      <span className="w-2 h-2 rounded-full bg-red-600/60 hidden sm:inline-block" />
+
       <button
         onClick={() => onCategoryChange('Workshops')}
-        className={`px-6 py-2 rounded-full border-2 text-sm font-medium transition-all duration-300 ${
+        className={`px-7 sm:px-9 py-3 rounded-full border-2 text-sm sm:text-base font-bold tracking-wider uppercase transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer shadow-lg ${
           activeCategory === 'Workshops'
-            ? 'bg-red-600 border-red-600 text-white'
-            : 'border-red-600 text-red-500 hover:bg-red-600 hover:text-white'
+            ? 'bg-red-600 border-red-600 text-white shadow-red-950/50'
+            : 'border-red-600/80 text-red-500 hover:bg-red-600 hover:text-white bg-black/50'
         }`}
       >
         Workshops
