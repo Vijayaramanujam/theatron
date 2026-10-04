@@ -1,37 +1,32 @@
-import { motion } from 'framer-motion';
-
 interface Props {
-  categories: string[];
-  active: string;
-  onChange: (cat: string) => void;
+  activeCategory: 'Competitions' | 'Workshops';
+  onCategoryChange: (category: 'Competitions' | 'Workshops') => void;
 }
 
-export default function CategoryFilter({ categories, active, onChange }: Props) {
+export default function CategoryFilter({ activeCategory, onCategoryChange }: Props) {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-4 my-8">
-      {categories.map((cat) => {
-        const isActive = active === cat;
-        return (
-          <button
-            key={cat}
-            onClick={() => onChange(cat)}
-            className={`relative px-8 py-3 rounded-full text-xs md:text-sm font-extrabold uppercase tracking-wider transition-all duration-300 ${
-              isActive
-                ? 'bg-[#dc2626] text-white shadow-lg shadow-red-600/30 scale-105'
-                : 'bg-transparent border-2 border-[#dc2626] text-[#dc2626] hover:bg-[#dc2626]/10'
-            }`}
-          >
-            {cat}
-            {isActive && (
-              <motion.div
-                layoutId="activeFilter"
-                className="absolute inset-0 bg-[#dc2626] rounded-full -z-10"
-                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-              />
-            )}
-          </button>
-        );
-      })}
+    <div className="flex justify-center gap-4 sm:gap-6 mb-12">
+      <button
+        onClick={() => onCategoryChange('Competitions')}
+        className={`px-6 py-2 rounded-full border-2 text-sm font-bold tracking-wide transition-all duration-300 ${
+          activeCategory === 'Competitions'
+            ? 'bg-red-600 border-red-600 text-white shadow-lg shadow-red-600/30'
+            : 'border-red-600 text-red-500 hover:bg-red-600 hover:text-white'
+        }`}
+      >
+        Competitions
+      </button>
+
+      <button
+        onClick={() => onCategoryChange('Workshops')}
+        className={`px-6 py-2 rounded-full border-2 text-sm font-bold tracking-wide transition-all duration-300 ${
+          activeCategory === 'Workshops'
+            ? 'bg-red-600 border-red-600 text-white shadow-lg shadow-red-600/30'
+            : 'border-red-600 text-red-500 hover:bg-red-600 hover:text-white'
+        }`}
+      >
+        Workshops
+      </button>
     </div>
   );
 }
