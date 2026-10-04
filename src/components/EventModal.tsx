@@ -94,7 +94,7 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 overflow-y-auto font-['Plus_Jakarta_Sans',sans-serif]">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 overflow-y-auto font-sans">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -104,90 +104,90 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
           className="fixed inset-0 bg-black/90 backdrop-blur-md"
         />
 
-        {/* Center Pop-Up Modal Container with NO Native White Scrollbar */}
+        {/* Center Pop-Up Modal Container */}
         <motion.div
           initial={{ scale: 0.85, opacity: 0, y: 30 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.85, opacity: 0, y: 30 }}
           transition={{ type: 'spring', damping: 24, stiffness: 320 }}
-          className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto no-scrollbar bg-[#090305] rounded-3xl border-2 border-[#e11d48] shadow-[0_0_60px_rgba(225,29,72,0.4)] flex flex-col z-10 my-auto"
+          className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto no-scrollbar bg-[#080406] rounded-2xl border border-[#e11d48]/40 shadow-[0_0_50px_rgba(225,29,72,0.35)] flex flex-col z-10 my-auto"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Close Button Top Right */}
+          {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-3 text-white bg-black/80 hover:bg-[#e11d48] rounded-full transition-all z-30 border border-[#e11d48]/50 shadow-2xl cursor-pointer"
+            className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2.5 text-white bg-black/80 hover:bg-[#e11d48] rounded-full transition-all z-30 border border-white/20 shadow-xl cursor-pointer"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
 
-          {/* Photographic Header Banner */}
-          <div className="relative aspect-[16/9] w-full overflow-hidden bg-black shrink-0 border-b border-[#e11d48]/40">
+          {/* Photographic Banner */}
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-black shrink-0 border-b border-[#e11d48]/30">
             <img
               src={event.image}
               alt={event.name}
               className="w-full h-full object-cover object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#090305] via-black/30 to-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#080406] via-black/30 to-black/60" />
 
             <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 z-10">
-              <div className="flex items-center gap-3 mb-3 flex-wrap">
-                <span className="text-white font-extrabold text-xs sm:text-sm uppercase tracking-widest bg-[#e11d48] px-4 py-1.5 rounded-full shadow-lg font-['Syne',sans-serif]">
+              <div className="flex items-center gap-3 mb-2 flex-wrap">
+                <span className="text-white font-extrabold text-xs uppercase tracking-wider bg-[#e11d48] px-3.5 py-1 rounded-full shadow-md">
                   {event.category}
                 </span>
                 {event.mode && (
-                  <span className={`text-xs font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-wider backdrop-blur-md ${
+                  <span className={`text-[11px] font-extrabold px-3.5 py-1 rounded-full uppercase tracking-wider backdrop-blur-md ${
                     event.mode.toUpperCase() === 'ONLINE'
-                      ? 'bg-blue-950/90 text-blue-400 border border-blue-500/60'
-                      : 'bg-emerald-950/90 text-emerald-400 border border-emerald-500/60'
+                      ? 'bg-blue-950/90 text-blue-400 border border-blue-500/50'
+                      : 'bg-emerald-950/90 text-emerald-400 border border-emerald-500/50'
                   }`}>
                     {event.mode}
                   </span>
                 )}
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight font-['Syne',sans-serif] drop-shadow-lg">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight drop-shadow-md">
                 {event.name}
               </h2>
             </div>
           </div>
 
-          {/* Modal Inner Body - AIRY & ELEGANT TYPOGRAPHY */}
-          <div className="p-6 sm:p-8 md:p-10 space-y-8 flex-grow">
+          {/* Modal Inner Body - SEPARATED SECTIONS WITH GENERATES MARGINS */}
+          <div className="p-6 sm:p-8 space-y-6 flex-grow">
             
             {/* Section 1: Overview */}
-            <div className="bg-[#120609] p-6 sm:p-8 rounded-2xl border border-[#e11d48]/30 space-y-3 shadow-sm">
-              <h4 className="text-[#f43f5e] font-extrabold text-xs sm:text-sm uppercase tracking-[0.2em] flex items-center gap-2 font-['Syne',sans-serif]">
-                <FileText className="w-4 h-4 text-[#e11d48]" />
+            <div className="bg-[#110609] p-6 rounded-xl border border-[#e11d48]/30 space-y-3">
+              <h4 className="text-red-500 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                <FileText className="w-4 h-4 text-red-500" />
                 About This Event
               </h4>
-              <p className="text-gray-200 text-base sm:text-lg leading-[1.8] font-normal">
+              <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-normal">
                 {event.description}
               </p>
             </div>
 
-            {/* Section 2: Format & Structure */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Section 2: Format / Mode */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {event.mode && (
-                <div className="flex items-start gap-4 p-6 bg-[#120609] border border-[#e11d48]/30 rounded-2xl shadow-sm">
-                  <div className="p-3 bg-[#e11d48]/20 rounded-xl text-[#f43f5e] shrink-0">
-                    {event.mode.toUpperCase() === 'ONLINE' ? <Monitor className="w-6 h-6" /> : <MapPin className="w-6 h-6" />}
+                <div className="flex items-start gap-3.5 p-5 bg-[#110609] border border-[#e11d48]/30 rounded-xl">
+                  <div className="p-2.5 bg-red-600/20 rounded-lg text-red-400 shrink-0">
+                    {event.mode.toUpperCase() === 'ONLINE' ? <Monitor className="w-5 h-5" /> : <MapPin className="w-5 h-5" />}
                   </div>
                   <div>
-                    <h5 className="text-white font-bold text-xs uppercase tracking-wider font-['Syne',sans-serif]">Format / Mode</h5>
-                    <p className="text-gray-300 text-sm sm:text-base capitalize mt-1 font-medium">{event.mode} Competition</p>
+                    <h5 className="text-white font-bold text-xs uppercase tracking-wider">Format / Mode</h5>
+                    <p className="text-gray-300 text-sm capitalize mt-0.5">{event.mode} Competition</p>
                   </div>
                 </div>
               )}
 
               {event.registration?.teamBased && (
-                <div className="flex items-start gap-4 p-6 bg-[#120609] border border-[#e11d48]/30 rounded-2xl shadow-sm">
-                  <div className="p-3 bg-[#e11d48]/20 rounded-xl text-[#f43f5e] shrink-0">
-                    <Users className="w-6 h-6" />
+                <div className="flex items-start gap-3.5 p-5 bg-[#110609] border border-[#e11d48]/30 rounded-xl">
+                  <div className="p-2.5 bg-red-600/20 rounded-lg text-red-400 shrink-0">
+                    <Users className="w-5 h-5" />
                   </div>
                   <div>
-                    <h5 className="text-white font-bold text-xs uppercase tracking-wider font-['Syne',sans-serif]">Team Requirement</h5>
-                    <p className="text-gray-300 text-sm sm:text-base mt-1 font-medium">
+                    <h5 className="text-white font-bold text-xs uppercase tracking-wider">Team Requirement</h5>
+                    <p className="text-gray-300 text-sm mt-0.5">
                       {event.registration.teamSize?.fixed
                         ? `${event.registration.teamSize.fixed.join(', ')} participants per team`
                         : `${event.registration.teamSize?.min || 1} to ${event.registration.teamSize?.max || 10} participants per team`}
@@ -198,16 +198,16 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
             </div>
 
             {/* Section 3: Rules & Guidelines */}
-            <div className="bg-[#120609] p-6 sm:p-8 rounded-2xl border border-[#e11d48]/30 space-y-4 shadow-sm">
-              <h4 className="text-white font-bold text-xs sm:text-sm uppercase tracking-wider font-['Syne',sans-serif] flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#e11d48]" />
+            <div className="bg-[#110609] p-6 rounded-xl border border-[#e11d48]/30 space-y-3">
+              <h4 className="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-red-500" />
                 Event Guidelines &amp; Rules
               </h4>
-              <ul className="space-y-3.5 text-sm sm:text-base text-gray-300">
+              <ul className="space-y-2.5 text-sm text-gray-300">
                 {guidelines.map((rule, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full bg-[#e11d48] mt-2 shrink-0 shadow-[0_0_8px_#e11d48]" />
-                    <span className="leading-relaxed font-normal">{rule}</span>
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0" />
+                    <span className="leading-relaxed">{rule}</span>
                   </li>
                 ))}
               </ul>
@@ -215,37 +215,37 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
 
             {/* Section 4: Debate Cap Notice if applicable */}
             {event.id === 'debate' && (
-              <div className="p-6 bg-amber-950/50 border border-amber-500/50 rounded-2xl flex items-start gap-4 shadow-sm">
-                <AlertCircle className="w-6 h-6 text-amber-400 shrink-0 mt-0.5" />
+              <div className="p-5 bg-amber-950/40 border border-amber-500/40 rounded-xl flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                 <div>
-                  <h5 className="text-amber-400 font-bold text-xs sm:text-sm uppercase tracking-wider font-['Syne',sans-serif]">Limited Team Cap</h5>
-                  <p className="text-amber-200/90 text-sm mt-1 leading-relaxed">
+                  <h5 className="text-amber-400 font-bold text-xs uppercase tracking-wider">Limited Team Cap</h5>
+                  <p className="text-amber-200/90 text-xs mt-0.5 leading-relaxed">
                     Participation is capped strictly at 20 teams. Early registration is strongly advised.
                   </p>
                 </div>
               </div>
             )}
 
-            {/* Section 5: METALLIC RED EVENT COORDINATORS & CONTACT */}
+            {/* Section 5: METALLIC RED EVENT COORDINATORS */}
             {event.contacts && event.contacts.length > 0 && (
-              <div className="p-6 sm:p-8 bg-gradient-to-br from-[#2a0910] via-[#1a0508] to-[#0d0305] rounded-2xl border border-[#e11d48]/60 shadow-[0_0_25px_rgba(225,29,72,0.3)] space-y-5">
-                <h4 className="text-[#f43f5e] font-extrabold text-xs sm:text-sm uppercase tracking-widest flex items-center gap-2 font-['Syne',sans-serif]">
-                  <Phone className="w-4 h-4 text-[#e11d48]" />
+              <div className="p-6 bg-gradient-to-br from-[#24080e] via-[#160408] to-[#0c0204] rounded-xl border border-[#e11d48]/50 shadow-lg space-y-4">
+                <h4 className="text-red-400 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-red-500" />
                   Event Coordinators &amp; Contact
                 </h4>
 
-                <div className="space-y-3.5">
+                <div className="space-y-3">
                   {event.contacts.map((contact, i) => (
                     <div
                       key={i}
-                      className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-black/60 border border-[#e11d48]/30 rounded-xl gap-3"
+                      className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-black/60 border border-red-500/20 rounded-lg gap-2"
                     >
-                      <span className="text-white font-bold text-base sm:text-lg tracking-wide">{contact.name}</span>
+                      <span className="text-white font-bold text-sm">{contact.name}</span>
                       <a
                         href={`tel:${contact.phone.replace(/\s+/g, '')}`}
-                        className="text-[#f43f5e] font-black text-base sm:text-lg hover:text-[#fda4af] hover:underline flex items-center gap-2 transition-colors"
+                        className="text-red-400 font-extrabold text-sm hover:text-red-300 hover:underline flex items-center gap-1.5 transition-colors"
                       >
-                        <Phone className="w-4 h-4" />
+                        <Phone className="w-3.5 h-3.5" />
                         {contact.phone}
                       </a>
                     </div>
@@ -253,18 +253,19 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
                 </div>
               </div>
             )}
-          </div>
 
-          {/* Metallic Red Register Button Footer */}
-          <div className="p-6 sm:p-8 border-t border-[#e11d48]/40 bg-[#070204] rounded-b-3xl shrink-0">
-            <button
-              onClick={() => onRegister(event)}
-              className="btn-metallic w-full py-4 sm:py-5 text-white font-black text-base uppercase tracking-widest rounded-2xl transition-all shadow-[0_0_30px_rgba(225,29,72,0.5)] flex items-center justify-center gap-3 cursor-pointer"
-            >
-              <Sparkles className="w-5 h-5 text-white/80" />
-              REGISTER NOW
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            {/* Section 6: METALLIC RED REGISTER BUTTON */}
+            <div className="pt-2">
+              <button
+                onClick={() => onRegister(event)}
+                className="btn-metallic w-full py-4 text-white font-bold text-sm uppercase tracking-widest rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-white/80" />
+                REGISTER NOW
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+
           </div>
         </motion.div>
       </div>
