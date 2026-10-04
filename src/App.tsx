@@ -70,8 +70,8 @@ export default function App() {
       <Navbar />
 
       {/* EVENTS DISCOVERY SECTION - THE ENTIRE PAGE FOCUS */}
-      <section id="events" className="relative z-10 pt-44 sm:pt-48 md:pt-52 pb-32 px-6 sm:px-8 md:px-12">
-        <div className="max-w-7xl mx-auto space-y-16 md:space-y-20">
+      <section id="events" className="relative z-10 pt-28 sm:pt-36 md:pt-40 pb-28 px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center w-full">
+        <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center space-y-8 sm:space-y-12">
           {/* Header & Subtitle */}
           <SectionHeading />
 
@@ -82,7 +82,7 @@ export default function App() {
           />
 
           {/* GSAP Animated Responsive Event Grid */}
-          <div ref={containerRef}>
+          <div ref={containerRef} className="w-full">
             <EventGrid
               events={filteredEvents}
               onSelectEvent={handleSelectEvent}
