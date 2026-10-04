@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MapPin, Monitor, Users, Phone, ArrowRight, AlertCircle, FileText, CheckCircle2, Sparkles } from 'lucide-react';
+import { X, MapPin, Monitor, Users, Phone, FileText, CheckCircle2 } from 'lucide-react';
 import type { EventData } from '../types/event';
 
 interface Props {
@@ -106,146 +106,124 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
 
         {/* Center Pop-Up Modal Container */}
         <motion.div
-          initial={{ scale: 0.85, opacity: 0, y: 30 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.85, opacity: 0, y: 30 }}
-          transition={{ type: 'spring', damping: 24, stiffness: 320 }}
-          className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto no-scrollbar bg-[#080406] rounded-2xl border border-[#e11d48]/40 shadow-[0_0_50px_rgba(225,29,72,0.35)] flex flex-col z-10 my-auto"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto no-scrollbar bg-black rounded-lg border border-gray-700 shadow-2xl flex flex-col z-10 my-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2.5 text-white bg-black/80 hover:bg-[#e11d48] rounded-full transition-all z-30 border border-white/20 shadow-xl cursor-pointer"
+            className="absolute top-4 right-4 p-2 text-white bg-black/80 hover:bg-red-600 rounded-full transition z-30 border border-gray-700 cursor-pointer"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
 
           {/* Photographic Banner */}
-          <div className="relative aspect-[16/9] w-full overflow-hidden bg-black shrink-0 border-b border-[#e11d48]/30">
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-900 shrink-0 border-b border-gray-800">
             <img
               src={event.image}
               alt={event.name}
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080406] via-black/30 to-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
-            <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 z-10">
+            <div className="absolute bottom-6 left-6 right-6 z-10">
               <div className="flex items-center gap-3 mb-2 flex-wrap">
-                <span className="text-white font-extrabold text-xs uppercase tracking-wider bg-[#e11d48] px-3.5 py-1 rounded-full shadow-md">
+                <span className="text-white font-bold text-xs uppercase tracking-wider bg-red-600 px-3 py-1 rounded">
                   {event.category}
                 </span>
                 {event.mode && (
-                  <span className={`text-[11px] font-extrabold px-3.5 py-1 rounded-full uppercase tracking-wider backdrop-blur-md ${
-                    event.mode.toUpperCase() === 'ONLINE'
-                      ? 'bg-blue-950/90 text-blue-400 border border-blue-500/50'
-                      : 'bg-emerald-950/90 text-emerald-400 border border-emerald-500/50'
-                  }`}>
+                  <span className="text-xs font-bold px-3 py-1 rounded uppercase tracking-wider bg-gray-800 text-gray-200 border border-gray-700">
                     {event.mode}
                   </span>
                 )}
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight drop-shadow-md">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
                 {event.name}
               </h2>
             </div>
           </div>
 
-          {/* Modal Inner Body - SEPARATED SECTIONS WITH GENERATES MARGINS */}
-          <div className="p-6 sm:p-8 space-y-6 flex-grow">
+          {/* Modal Inner Body - Crisp, Clean Alignment */}
+          <div className="p-6 sm:p-8 space-y-6 flex-grow bg-black">
             
-            {/* Section 1: Overview */}
-            <div className="bg-[#110609] p-6 rounded-xl border border-[#e11d48]/30 space-y-3">
-              <h4 className="text-red-500 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
-                <FileText className="w-4 h-4 text-red-500" />
+            {/* Overview */}
+            <div className="space-y-2">
+              <h4 className="text-red-600 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                <FileText className="w-4 h-4" />
                 About This Event
               </h4>
-              <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-normal">
+              <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
                 {event.description}
               </p>
             </div>
 
-            {/* Section 2: Format / Mode */}
+            <div className="h-px bg-red-600 w-full" />
+
+            {/* Format */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {event.mode && (
-                <div className="flex items-start gap-3.5 p-5 bg-[#110609] border border-[#e11d48]/30 rounded-xl">
-                  <div className="p-2.5 bg-red-600/20 rounded-lg text-red-400 shrink-0">
+                <div className="flex items-start gap-3 p-4 bg-gray-900/50 border border-gray-800 rounded">
+                  <div className="p-2 bg-red-600/20 rounded text-red-500 shrink-0">
                     {event.mode.toUpperCase() === 'ONLINE' ? <Monitor className="w-5 h-5" /> : <MapPin className="w-5 h-5" />}
                   </div>
                   <div>
-                    <h5 className="text-white font-bold text-xs uppercase tracking-wider">Format / Mode</h5>
-                    <p className="text-gray-300 text-sm capitalize mt-0.5">{event.mode} Competition</p>
+                    <h5 className="text-white font-bold text-xs uppercase tracking-wider">Format</h5>
+                    <p className="text-gray-400 text-sm capitalize mt-0.5">{event.mode} Competition</p>
                   </div>
                 </div>
               )}
 
               {event.registration?.teamBased && (
-                <div className="flex items-start gap-3.5 p-5 bg-[#110609] border border-[#e11d48]/30 rounded-xl">
-                  <div className="p-2.5 bg-red-600/20 rounded-lg text-red-400 shrink-0">
+                <div className="flex items-start gap-3 p-4 bg-gray-900/50 border border-gray-800 rounded">
+                  <div className="p-2 bg-red-600/20 rounded text-red-500 shrink-0">
                     <Users className="w-5 h-5" />
                   </div>
                   <div>
                     <h5 className="text-white font-bold text-xs uppercase tracking-wider">Team Requirement</h5>
-                    <p className="text-gray-300 text-sm mt-0.5">
+                    <p className="text-gray-400 text-sm mt-0.5">
                       {event.registration.teamSize?.fixed
-                        ? `${event.registration.teamSize.fixed.join(', ')} participants per team`
-                        : `${event.registration.teamSize?.min || 1} to ${event.registration.teamSize?.max || 10} participants per team`}
+                        ? `${event.registration.teamSize.fixed.join(', ')} participants`
+                        : `${event.registration.teamSize?.min || 1} - ${event.registration.teamSize?.max || 10} participants`}
                     </p>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Section 3: Rules & Guidelines */}
-            <div className="bg-[#110609] p-6 rounded-xl border border-[#e11d48]/30 space-y-3">
+            {/* Rules */}
+            <div className="space-y-2 p-4 bg-gray-900/50 border border-gray-800 rounded">
               <h4 className="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500" />
-                Event Guidelines &amp; Rules
+                <CheckCircle2 className="w-4 h-4 text-red-600" />
+                Guidelines &amp; Rules
               </h4>
-              <ul className="space-y-2.5 text-sm text-gray-300">
+              <ul className="space-y-2 text-sm text-gray-400">
                 {guidelines.map((rule, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0" />
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-600 mt-2 shrink-0" />
                     <span className="leading-relaxed">{rule}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Section 4: Debate Cap Notice if applicable */}
-            {event.id === 'debate' && (
-              <div className="p-5 bg-amber-950/40 border border-amber-500/40 rounded-xl flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                <div>
-                  <h5 className="text-amber-400 font-bold text-xs uppercase tracking-wider">Limited Team Cap</h5>
-                  <p className="text-amber-200/90 text-xs mt-0.5 leading-relaxed">
-                    Participation is capped strictly at 20 teams. Early registration is strongly advised.
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Section 5: METALLIC RED EVENT COORDINATORS */}
+            {/* Contacts */}
             {event.contacts && event.contacts.length > 0 && (
-              <div className="p-6 bg-gradient-to-br from-[#24080e] via-[#160408] to-[#0c0204] rounded-xl border border-[#e11d48]/50 shadow-lg space-y-4">
-                <h4 className="text-red-400 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-red-500" />
-                  Event Coordinators &amp; Contact
+              <div className="p-4 bg-gray-900/50 border border-gray-800 rounded space-y-3">
+                <h4 className="text-red-600 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  Event Coordinators
                 </h4>
 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {event.contacts.map((contact, i) => (
-                    <div
-                      key={i}
-                      className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-black/60 border border-red-500/20 rounded-lg gap-2"
-                    >
-                      <span className="text-white font-bold text-sm">{contact.name}</span>
-                      <a
-                        href={`tel:${contact.phone.replace(/\s+/g, '')}`}
-                        className="text-red-400 font-extrabold text-sm hover:text-red-300 hover:underline flex items-center gap-1.5 transition-colors"
-                      >
-                        <Phone className="w-3.5 h-3.5" />
+                    <div key={i} className="flex justify-between items-center text-sm">
+                      <span className="text-gray-300 font-medium">{contact.name}</span>
+                      <a href={`tel:${contact.phone.replace(/\s+/g, '')}`} className="text-red-500 font-bold hover:underline">
                         {contact.phone}
                       </a>
                     </div>
@@ -254,15 +232,13 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
               </div>
             )}
 
-            {/* Section 6: METALLIC RED REGISTER BUTTON */}
+            {/* Register CTA */}
             <div className="pt-2">
               <button
                 onClick={() => onRegister(event)}
-                className="btn-metallic w-full py-4 text-white font-bold text-sm uppercase tracking-widest rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                className="bg-red-600 hover:bg-red-700 w-full py-3.5 text-white font-bold text-sm uppercase tracking-wider transition rounded"
               >
-                <Sparkles className="w-4 h-4 text-white/80" />
-                REGISTER NOW
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                REGISTER NOW →
               </button>
             </div>
 

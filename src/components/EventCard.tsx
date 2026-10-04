@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import type { EventData } from '../types/event';
 
 interface Props {
@@ -8,71 +7,44 @@ interface Props {
   onSelect: (event: EventData) => void;
 }
 
-const EventCard: React.FC<Props> = ({ event, index, onSelect }) => {
+const EventCard: React.FC<Props> = ({ event, onSelect }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.06 }}
-      whileHover={{ y: -12, scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
+    <div
       onClick={() => onSelect(event)}
-      className="group cursor-pointer metallic-card rounded-xl overflow-hidden flex flex-col justify-between h-full transform transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] border border-[#e11d48]/30 hover:border-[#e11d48]"
+      className="group cursor-pointer border border-gray-800 bg-black flex flex-col justify-between h-full transition duration-300 hover:border-gray-600"
     >
-      {/* Real Photography Banner Header */}
-      <div className="relative h-60 sm:h-64 md:h-72 overflow-hidden bg-black">
+      {/* Event Image Banner */}
+      <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden bg-gray-900">
         <img
           alt={event.name}
           src={event.image}
-          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+          className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
           loading="lazy"
         />
-        {/* Dark Metallic Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a0c] via-black/30 to-black/50" />
-
-        {/* Category Pill Badge */}
-        <div className="absolute top-4 left-4 z-10">
-          <span className="text-[11px] font-extrabold uppercase tracking-widest bg-[#e11d48] text-white px-3.5 py-1.5 rounded-full shadow-lg font-['Syne',sans-serif]">
-            {event.category}
-          </span>
-        </div>
-
-        {/* Online / Offline Mode Badge */}
-        {event.mode && (
-          <div className="absolute top-4 right-4 z-10">
-            <span className={`text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md ${
-              event.mode.toUpperCase() === 'ONLINE'
-                ? 'bg-blue-950/90 text-blue-400 border border-blue-500/60'
-                : 'bg-emerald-950/90 text-emerald-400 border border-emerald-500/60'
-            }`}>
-              {event.mode}
-            </span>
-          </div>
-        )}
       </div>
 
-      {/* Content Area with Spacious Internal Padding */}
-      <div className="p-6 sm:p-7 md:p-8 bg-[#0f0a0c] flex flex-col flex-1 justify-between space-y-6">
+      {/* Card Content Area - Neat Left Alignment matching Reference */}
+      <div className="p-4 sm:p-5 md:p-6 bg-black flex flex-col flex-1 justify-between">
         <div>
-          <h3 className="text-2xl sm:text-3xl font-black text-white mb-3 font-['Syne',sans-serif] tracking-tight group-hover:text-[#f43f5e] transition-colors">
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-2 md:mb-3 font-sans">
             {event.name}
           </h3>
-          <p className="text-gray-300 text-sm sm:text-base leading-relaxed line-clamp-3 font-normal font-['Space_Grotesk',sans-serif]">
+          <p className="text-gray-400 text-xs sm:text-sm mb-3 md:mb-4 leading-relaxed line-clamp-3 font-normal">
             {event.description}
           </p>
         </div>
 
         <div>
-          {/* Metallic Red Line Divider */}
-          <div className="h-[2px] bg-gradient-to-r from-[#e11d48] via-[#be123c] to-transparent mb-5" />
+          {/* Thin Red Horizontal Line Divider */}
+          <div className="h-px bg-red-600 mb-3 md:mb-4 w-full" />
 
-          {/* Bottom Action Row */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          {/* Bottom Action Footer Row */}
+          <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-[10px] text-gray-500 mb-0.5 font-bold uppercase tracking-widest">
-                {event.mode ? 'FORMAT' : 'CATEGORY'}
+              <p className="text-[10px] sm:text-xs text-gray-500 mb-0.5 font-semibold uppercase tracking-wider">
+                {event.mode ? 'MODE' : 'CATEGORY'}
               </p>
-              <p className="text-[#f43f5e] font-extrabold text-sm sm:text-base uppercase tracking-wide">
+              <p className="text-red-600 font-bold text-sm md:text-lg uppercase">
                 {event.mode || event.category}
               </p>
             </div>
@@ -82,14 +54,14 @@ const EventCard: React.FC<Props> = ({ event, index, onSelect }) => {
                 e.stopPropagation();
                 onSelect(event);
               }}
-              className="btn-metallic px-6 py-3 text-white font-extrabold text-xs tracking-widest uppercase rounded-lg w-full sm:w-auto flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              className="bg-red-600 px-4 sm:px-6 py-2 text-white font-bold text-xs sm:text-sm hover:bg-red-700 transition uppercase tracking-wider"
             >
               REGISTER →
             </button>
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
