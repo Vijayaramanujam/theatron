@@ -5,13 +5,13 @@ interface Props {
 
 export default function CategoryFilter({ activeCategory, onCategoryChange }: Props) {
   return (
-    <div className="flex justify-center gap-4 sm:gap-6 mb-14">
+    <div className="flex justify-center gap-6 mb-12">
       <button
         onClick={() => onCategoryChange('Competitions')}
-        className={`px-8 py-3 rounded-full text-xs sm:text-sm font-extrabold uppercase tracking-widest transition-all duration-300 ${
+        className={`px-6 py-2 rounded-full border-2 text-sm font-medium transition-all duration-300 ${
           activeCategory === 'Competitions'
-            ? 'btn-metallic text-white scale-105 shadow-[0_0_20px_rgba(225,29,72,0.5)]'
-            : 'border-2 border-[#e11d48]/50 text-[#f43f5e] hover:bg-[#e11d48]/10 hover:border-[#e11d48]'
+            ? 'bg-red-600 border-red-600 text-white'
+            : 'border-red-600 text-red-500 hover:bg-red-600 hover:text-white'
         }`}
       >
         Competitions
@@ -19,10 +19,10 @@ export default function CategoryFilter({ activeCategory, onCategoryChange }: Pro
 
       <button
         onClick={() => onCategoryChange('Workshops')}
-        className={`px-8 py-3 rounded-full text-xs sm:text-sm font-extrabold uppercase tracking-widest transition-all duration-300 ${
+        className={`px-6 py-2 rounded-full border-2 text-sm font-medium transition-all duration-300 ${
           activeCategory === 'Workshops'
-            ? 'btn-metallic text-white scale-105 shadow-[0_0_20px_rgba(225,29,72,0.5)]'
-            : 'border-2 border-[#e11d48]/50 text-[#f43f5e] hover:bg-[#e11d48]/10 hover:border-[#e11d48]'
+            ? 'bg-red-600 border-red-600 text-white'
+            : 'border-red-600 text-red-500 hover:bg-red-600 hover:text-white'
         }`}
       >
         Workshops
