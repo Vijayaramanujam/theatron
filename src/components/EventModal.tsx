@@ -94,188 +94,179 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 overflow-hidden">
-        {/* Backdrop */}
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto">
+        {/* Dark Glass Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/85 backdrop-blur-md"
         />
 
-        {/* Side Pop-Out Drawer sliding from Right Edge */}
-        <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-            className="w-screen max-w-xl sm:max-w-2xl bg-[#090305] border-l border-[#e11d48]/50 shadow-[-20px_0_60px_rgba(0,0,0,0.9)] flex flex-col h-full overflow-y-auto font-['Space_Grotesk',sans-serif]"
-            onClick={(e) => e.stopPropagation()}
+        {/* CENTER POP-UP MODAL (POP UP FROM THE MIDDLE) */}
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0, y: 30 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.8, opacity: 0, y: 30 }}
+          transition={{ type: 'spring', damping: 22, stiffness: 300 }}
+          className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto bg-[#0a0305] rounded-3xl border-2 border-[#e11d48] shadow-[0_0_60px_rgba(225,29,72,0.5)] flex flex-col font-['Space_Grotesk',sans-serif] z-10 my-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close Button Top Right */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-3 text-white bg-black/80 hover:bg-[#e11d48] rounded-full transition-all z-30 border border-[#e11d48]/50 shadow-2xl cursor-pointer"
+            aria-label="Close modal"
           >
-            {/* Header Sticky Bar with Close Button */}
-            <div className="sticky top-0 z-30 flex items-center justify-between p-4 sm:p-6 bg-[#090305]/95 backdrop-blur-md border-b border-[#e11d48]/30">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#e11d48] animate-pulse" />
-                <span className="text-[#f43f5e] font-extrabold text-xs uppercase tracking-widest font-['Syne',sans-serif]">
-                  Event Details
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* High-Res Photographic Header Banner */}
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-black shrink-0 border-b border-[#e11d48]/40">
+            <img
+              src={event.image}
+              alt={event.name}
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0305] via-black/30 to-black/60" />
+
+            <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 z-10">
+              <div className="flex items-center gap-3 mb-3 flex-wrap">
+                <span className="text-white font-extrabold text-xs sm:text-sm uppercase tracking-widest bg-[#e11d48] px-4 py-1.5 rounded-full shadow-lg font-['Syne',sans-serif]">
+                  {event.category}
                 </span>
-              </div>
-              <button
-                onClick={onClose}
-                className="p-2.5 text-white bg-black/60 hover:bg-[#e11d48] rounded-full transition-all border border-[#e11d48]/40 cursor-pointer"
-                aria-label="Close panel"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Clean Photographic Banner */}
-            <div className="relative aspect-[16/9] w-full overflow-hidden bg-black shrink-0 border-b border-[#e11d48]/30">
-              <img
-                src={event.image}
-                alt={event.name}
-                className="w-full h-full object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#090305] via-transparent to-black/50" />
-
-              <div className="absolute bottom-6 left-6 right-6 z-10">
-                <div className="flex items-center gap-3 mb-2 flex-wrap">
-                  <span className="text-white font-extrabold text-xs uppercase tracking-widest bg-[#e11d48] px-3 py-1 rounded-full shadow-md font-['Syne',sans-serif]">
-                    {event.category}
-                  </span>
-                  {event.mode && (
-                    <span className={`text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm ${
-                      event.mode.toUpperCase() === 'ONLINE'
-                        ? 'bg-blue-950/90 text-blue-400 border border-blue-500/50'
-                        : 'bg-emerald-950/90 text-emerald-400 border border-emerald-500/50'
-                    }`}>
-                      {event.mode}
-                    </span>
-                  )}
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight font-['Syne',sans-serif]">
-                  {event.name}
-                </h2>
-              </div>
-            </div>
-
-            {/* Drawer Body with Spacious Vertical Breathing Room */}
-            <div className="p-6 sm:p-8 md:p-10 space-y-10 flex-grow">
-              
-              {/* Event Overview */}
-              <div className="space-y-4">
-                <h4 className="text-[#f43f5e] font-extrabold text-xs uppercase tracking-widest flex items-center gap-2 font-['Syne',sans-serif]">
-                  <FileText className="w-4 h-4 text-[#e11d48]" />
-                  Event Description &amp; Overview
-                </h4>
-                <p className="text-gray-200 text-base sm:text-lg leading-relaxed font-normal bg-[#130609] p-5 rounded-xl border border-[#e11d48]/20">
-                  {event.description}
-                </p>
-              </div>
-
-              {/* Format & Team Requirements */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {event.mode && (
-                  <div className="flex items-start gap-4 p-5 bg-gradient-to-br from-[#18070a] to-[#090305] border border-[#e11d48]/40 rounded-xl">
-                    <div className="p-3 bg-[#e11d48]/20 rounded-xl text-[#f43f5e] shrink-0">
-                      {event.mode.toUpperCase() === 'ONLINE' ? <Monitor className="w-6 h-6" /> : <MapPin className="w-6 h-6" />}
-                    </div>
-                    <div>
-                      <h5 className="text-white font-bold text-xs uppercase tracking-wider font-['Syne',sans-serif]">Format / Mode</h5>
-                      <p className="text-gray-300 text-sm capitalize mt-1">{event.mode} Competition</p>
-                    </div>
-                  </div>
-                )}
-
-                {event.registration?.teamBased && (
-                  <div className="flex items-start gap-4 p-5 bg-gradient-to-br from-[#18070a] to-[#090305] border border-[#e11d48]/40 rounded-xl">
-                    <div className="p-3 bg-[#e11d48]/20 rounded-xl text-[#f43f5e] shrink-0">
-                      <Users className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h5 className="text-white font-bold text-xs uppercase tracking-wider font-['Syne',sans-serif]">Team Requirement</h5>
-                      <p className="text-gray-300 text-sm mt-1">
-                        {event.registration.teamSize?.fixed
-                          ? `${event.registration.teamSize.fixed.join(', ')} participants per team`
-                          : `${event.registration.teamSize?.min || 1} to ${event.registration.teamSize?.max || 10} participants per team`}
-                      </p>
-                    </div>
-                  </div>
+                  <span className={`text-xs font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-wider backdrop-blur-md ${
+                    event.mode.toUpperCase() === 'ONLINE'
+                      ? 'bg-blue-950/90 text-blue-400 border border-blue-500/60'
+                      : 'bg-emerald-950/90 text-emerald-400 border border-emerald-500/60'
+                  }`}>
+                    {event.mode}
+                  </span>
                 )}
               </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight font-['Syne',sans-serif] drop-shadow-lg">
+                {event.name}
+              </h2>
+            </div>
+          </div>
 
-              {/* Event Rules & Guidelines */}
-              <div className="space-y-4 p-6 bg-gradient-to-br from-[#1c080d] to-[#090305] border border-[#e11d48]/30 rounded-xl">
-                <h4 className="text-white font-bold text-xs uppercase tracking-wider font-['Syne',sans-serif] flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#e11d48]" />
-                  Event Rules &amp; Guidelines
-                </h4>
-                <ul className="space-y-3 text-sm text-gray-300">
-                  {guidelines.map((rule, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <span className="w-2 h-2 rounded-full bg-[#e11d48] mt-2 shrink-0 shadow-[0_0_8px_#e11d48]" />
-                      <span className="leading-relaxed">{rule}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          {/* Modal Inner Body - SPACIOUS, AIRY LAYOUT WITH 32px VERTICAL GAPS */}
+          <div className="p-6 sm:p-8 md:p-12 space-y-8 flex-grow">
+            
+            {/* SECTION 1: Event Description & Overview */}
+            <div className="bg-[#140609] p-6 sm:p-8 rounded-2xl border border-[#e11d48]/30 space-y-4 shadow-md">
+              <h4 className="text-[#f43f5e] font-extrabold text-xs sm:text-sm uppercase tracking-widest flex items-center gap-2.5 font-['Syne',sans-serif]">
+                <FileText className="w-5 h-5 text-[#e11d48]" />
+                Event Description &amp; Overview
+              </h4>
+              <p className="text-gray-200 text-base sm:text-lg leading-relaxed font-normal">
+                {event.description}
+              </p>
+            </div>
 
-              {/* Debate Alert */}
-              {event.id === 'debate' && (
-                <div className="p-5 bg-amber-950/60 border border-amber-500/60 rounded-xl flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+            {/* SECTION 2: Format & Team Requirements Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {event.mode && (
+                <div className="flex items-start gap-4 p-6 bg-[#140609] border border-[#e11d48]/30 rounded-2xl shadow-md">
+                  <div className="p-3 bg-[#e11d48]/20 rounded-xl text-[#f43f5e] shrink-0">
+                    {event.mode.toUpperCase() === 'ONLINE' ? <Monitor className="w-6 h-6" /> : <MapPin className="w-6 h-6" />}
+                  </div>
                   <div>
-                    <h5 className="text-amber-400 font-bold text-xs uppercase tracking-wider font-['Syne',sans-serif]">Limited Capacity</h5>
-                    <p className="text-amber-200/90 text-xs mt-1 leading-relaxed">
-                      Participation is capped strictly at 20 teams. Register early to secure your spot.
+                    <h5 className="text-white font-bold text-xs uppercase tracking-wider font-['Syne',sans-serif]">Format / Mode</h5>
+                    <p className="text-gray-300 text-sm sm:text-base capitalize mt-1 font-medium">{event.mode} Competition</p>
+                  </div>
+                </div>
+              )}
+
+              {event.registration?.teamBased && (
+                <div className="flex items-start gap-4 p-6 bg-[#140609] border border-[#e11d48]/30 rounded-2xl shadow-md">
+                  <div className="p-3 bg-[#e11d48]/20 rounded-xl text-[#f43f5e] shrink-0">
+                    <Users className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h5 className="text-white font-bold text-xs uppercase tracking-wider font-['Syne',sans-serif]">Team Structure</h5>
+                    <p className="text-gray-300 text-sm sm:text-base mt-1 font-medium">
+                      {event.registration.teamSize?.fixed
+                        ? `${event.registration.teamSize.fixed.join(', ')} participants per team`
+                        : `${event.registration.teamSize?.min || 1} to ${event.registration.teamSize?.max || 10} participants per team`}
                     </p>
                   </div>
                 </div>
               )}
-
-              {/* Metallic Red Event Coordinators Section */}
-              {event.contacts && event.contacts.length > 0 && (
-                <div className="p-6 bg-gradient-to-br from-[#2a0910] via-[#1a0508] to-[#0d0305] rounded-xl border border-[#e11d48]/60 shadow-[0_0_25px_rgba(225,29,72,0.35)] space-y-5">
-                  <h4 className="text-[#f43f5e] font-extrabold text-xs uppercase tracking-widest flex items-center gap-2 font-['Syne',sans-serif]">
-                    <Phone className="w-4 h-4 text-[#e11d48]" />
-                    Event Coordinators &amp; Contact
-                  </h4>
-
-                  <div className="space-y-4">
-                    {event.contacts.map((contact, i) => (
-                      <div
-                        key={i}
-                        className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-black/60 border border-[#e11d48]/30 rounded-xl gap-2"
-                      >
-                        <span className="text-white font-bold text-base tracking-wide">{contact.name}</span>
-                        <a
-                          href={`tel:${contact.phone.replace(/\s+/g, '')}`}
-                          className="text-[#f43f5e] font-extrabold text-sm sm:text-base hover:text-[#fda4af] hover:underline flex items-center gap-2 transition-colors"
-                        >
-                          <Phone className="w-4 h-4" />
-                          {contact.phone}
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
 
-            {/* Sticky Metallic Red Register Footer */}
-            <div className="sticky bottom-0 p-6 sm:p-8 border-t border-[#e11d48]/40 bg-[#090305] mt-auto">
+            {/* SECTION 3: Event Rules & Guidelines */}
+            <div className="bg-[#140609] p-6 sm:p-8 rounded-2xl border border-[#e11d48]/30 space-y-4 shadow-md">
+              <h4 className="text-white font-bold text-xs sm:text-sm uppercase tracking-wider font-['Syne',sans-serif] flex items-center gap-2.5">
+                <CheckCircle2 className="w-5 h-5 text-[#e11d48]" />
+                Event Rules &amp; Guidelines
+              </h4>
+              <ul className="space-y-3 text-sm sm:text-base text-gray-300">
+                {guidelines.map((rule, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <span className="w-2 h-2 rounded-full bg-[#e11d48] mt-2 shrink-0 shadow-[0_0_8px_#e11d48]" />
+                    <span className="leading-relaxed">{rule}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Debate Alert if applicable */}
+            {event.id === 'debate' && (
+              <div className="p-6 bg-amber-950/60 border border-amber-500/60 rounded-2xl flex items-start gap-4 shadow-md">
+                <AlertCircle className="w-6 h-6 text-amber-400 shrink-0 mt-0.5" />
+                <div>
+                  <h5 className="text-amber-400 font-bold text-xs sm:text-sm uppercase tracking-wider font-['Syne',sans-serif]">Limited Team Cap</h5>
+                  <p className="text-amber-200/90 text-sm mt-1 leading-relaxed">
+                    Participation is capped strictly at 20 teams. Early registration is strongly advised.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* SECTION 4: METALLIC RED EVENT COORDINATORS & CONTACT SECTION */}
+            {event.contacts && event.contacts.length > 0 && (
+              <div className="p-6 sm:p-8 bg-gradient-to-br from-[#2e0911] via-[#1b0509] to-[#0d0305] rounded-2xl border border-[#e11d48]/60 shadow-[0_0_30px_rgba(225,29,72,0.35)] space-y-5">
+                <h4 className="text-[#f43f5e] font-extrabold text-xs sm:text-sm uppercase tracking-widest flex items-center gap-2.5 font-['Syne',sans-serif]">
+                  <Phone className="w-5 h-5 text-[#e11d48]" />
+                  Event Coordinators &amp; Contact
+                </h4>
+
+                <div className="space-y-4">
+                  {event.contacts.map((contact, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-black/60 border border-[#e11d48]/40 rounded-xl gap-3"
+                    >
+                      <span className="text-white font-bold text-base sm:text-lg tracking-wide">{contact.name}</span>
+                      <a
+                        href={`tel:${contact.phone.replace(/\s+/g, '')}`}
+                        className="text-[#f43f5e] font-black text-base sm:text-lg hover:text-[#fda4af] hover:underline flex items-center gap-2 transition-colors"
+                      >
+                        <Phone className="w-4 h-4" />
+                        {contact.phone}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* SECTION 5: METALLIC RED REGISTER BUTTON */}
+            <div className="pt-4">
               <button
                 onClick={() => onRegister(event)}
-                className="w-full py-4 text-white font-black text-sm uppercase tracking-widest rounded-xl transition-all shadow-[0_0_35px_rgba(225,29,72,0.6)] flex items-center justify-center gap-2 bg-gradient-to-r from-[#e11d48] via-[#be123c] to-[#800020] hover:from-[#f43f5e] hover:to-[#e11d48] transform hover:scale-[1.02] cursor-pointer"
+                className="w-full py-4 sm:py-5 text-white font-black text-base sm:text-lg uppercase tracking-widest rounded-2xl transition-all shadow-[0_0_35px_rgba(225,29,72,0.6)] flex items-center justify-center gap-3 bg-gradient-to-r from-[#e11d48] via-[#be123c] to-[#800020] hover:from-[#f43f5e] hover:to-[#e11d48] transform hover:scale-[1.02] cursor-pointer"
               >
                 REGISTER NOW
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
-          </motion.div>
-        </div>
+
+          </div>
+        </motion.div>
       </div>
     </AnimatePresence>
   );
