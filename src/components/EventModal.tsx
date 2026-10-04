@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MapPin, Monitor, Users, Phone, FileText, CheckCircle2 } from 'lucide-react';
+import { X, MapPin, Monitor, Users, Phone, FileText, CheckCircle2, AlertCircle } from 'lucide-react';
 import type { EventData } from '../types/event';
 
 interface Props {
@@ -110,7 +110,7 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto no-scrollbar bg-black rounded-lg border border-gray-700 shadow-2xl flex flex-col z-10 my-auto"
+          className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto no-scrollbar bg-black rounded-xl border border-gray-800 shadow-2xl flex flex-col z-10 my-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
@@ -129,10 +129,10 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
               alt={event.name}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
             <div className="absolute bottom-6 left-6 right-6 z-10">
-              <div className="flex items-center gap-3 mb-2 flex-wrap">
+              <div className="flex items-center gap-3 mb-3 flex-wrap">
                 <span className="text-white font-bold text-xs uppercase tracking-wider bg-red-600 px-3 py-1 rounded">
                   {event.category}
                 </span>
@@ -148,81 +148,92 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
             </div>
           </div>
 
-          {/* Modal Inner Body - Crisp, Clean Alignment */}
-          <div className="p-6 sm:p-8 space-y-6 flex-grow bg-black">
+          {/* Modal Content Body - CRISP SPACING & PERFECT ALIGNMENT */}
+          <div className="p-6 sm:p-8 space-y-6 bg-black flex-grow">
             
-            {/* Overview */}
-            <div className="space-y-2">
-              <h4 className="text-red-600 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
-                <FileText className="w-4 h-4" />
+            {/* Overview Section */}
+            <div className="p-5 bg-zinc-900/60 border border-zinc-800 rounded-lg space-y-3">
+              <h4 className="text-red-500 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                <FileText className="w-4 h-4 text-red-500" />
                 About This Event
               </h4>
-              <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
+              <p className="text-gray-300 text-sm sm:text-base leading-relaxed font-normal pt-1">
                 {event.description}
               </p>
             </div>
 
-            <div className="h-px bg-red-600 w-full" />
-
-            {/* Format */}
+            {/* Format & Team Requirements */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {event.mode && (
-                <div className="flex items-start gap-3 p-4 bg-gray-900/50 border border-gray-800 rounded">
-                  <div className="p-2 bg-red-600/20 rounded text-red-500 shrink-0">
-                    {event.mode.toUpperCase() === 'ONLINE' ? <Monitor className="w-5 h-5" /> : <MapPin className="w-5 h-5" />}
+                <div className="p-5 bg-zinc-900/60 border border-zinc-800 rounded-lg space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-red-600/20 rounded text-red-500">
+                      {event.mode.toUpperCase() === 'ONLINE' ? <Monitor className="w-4 h-4" /> : <MapPin className="w-4 h-4" />}
+                    </div>
+                    <h5 className="text-red-500 font-bold text-xs uppercase tracking-wider">Format</h5>
                   </div>
-                  <div>
-                    <h5 className="text-white font-bold text-xs uppercase tracking-wider">Format</h5>
-                    <p className="text-gray-400 text-sm capitalize mt-0.5">{event.mode} Competition</p>
-                  </div>
+                  <p className="text-gray-200 text-sm capitalize font-medium pt-1">{event.mode} Competition</p>
                 </div>
               )}
 
               {event.registration?.teamBased && (
-                <div className="flex items-start gap-3 p-4 bg-gray-900/50 border border-gray-800 rounded">
-                  <div className="p-2 bg-red-600/20 rounded text-red-500 shrink-0">
-                    <Users className="w-5 h-5" />
+                <div className="p-5 bg-zinc-900/60 border border-zinc-800 rounded-lg space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-red-600/20 rounded text-red-500">
+                      <Users className="w-4 h-4" />
+                    </div>
+                    <h5 className="text-red-500 font-bold text-xs uppercase tracking-wider">Team Requirement</h5>
                   </div>
-                  <div>
-                    <h5 className="text-white font-bold text-xs uppercase tracking-wider">Team Requirement</h5>
-                    <p className="text-gray-400 text-sm mt-0.5">
-                      {event.registration.teamSize?.fixed
-                        ? `${event.registration.teamSize.fixed.join(', ')} participants`
-                        : `${event.registration.teamSize?.min || 1} - ${event.registration.teamSize?.max || 10} participants`}
-                    </p>
-                  </div>
+                  <p className="text-gray-200 text-sm font-medium pt-1">
+                    {event.registration.teamSize?.fixed
+                      ? `${event.registration.teamSize.fixed.join(', ')} participants`
+                      : `${event.registration.teamSize?.min || 1} - ${event.registration.teamSize?.max || 10} participants`}
+                  </p>
                 </div>
               )}
             </div>
 
-            {/* Rules */}
-            <div className="space-y-2 p-4 bg-gray-900/50 border border-gray-800 rounded">
-              <h4 className="text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-600" />
+            {/* Guidelines & Rules */}
+            <div className="p-5 bg-zinc-900/60 border border-zinc-800 rounded-lg space-y-3">
+              <h4 className="text-red-500 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-red-500" />
                 Guidelines &amp; Rules
               </h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2.5 text-sm text-gray-300 pt-1">
                 {guidelines.map((rule, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-600 mt-2 shrink-0" />
+                  <li key={idx} className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 shrink-0" />
                     <span className="leading-relaxed">{rule}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Contacts */}
+            {/* Debate Alert if applicable */}
+            {event.id === 'debate' && (
+              <div className="p-4 bg-amber-950/40 border border-amber-500/40 rounded-lg flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                <div>
+                  <h5 className="text-amber-400 font-bold text-xs uppercase tracking-wider">Limited Team Cap</h5>
+                  <p className="text-amber-200/90 text-xs mt-1 leading-relaxed">
+                    Participation is capped strictly at 20 teams. Early registration is strongly advised.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Event Coordinators */}
             {event.contacts && event.contacts.length > 0 && (
-              <div className="p-4 bg-gray-900/50 border border-gray-800 rounded space-y-3">
-                <h4 className="text-red-600 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
-                  <Phone className="w-4 h-4" />
+              <div className="p-5 bg-zinc-900/60 border border-zinc-800 rounded-lg space-y-4">
+                <h4 className="text-red-500 font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-red-500" />
                   Event Coordinators
                 </h4>
 
-                <div className="space-y-2">
+                <div className="space-y-3 pt-1">
                   {event.contacts.map((contact, i) => (
-                    <div key={i} className="flex justify-between items-center text-sm">
-                      <span className="text-gray-300 font-medium">{contact.name}</span>
+                    <div key={i} className="flex justify-between items-center text-sm py-1 border-b border-zinc-800/60 last:border-0">
+                      <span className="text-gray-200 font-bold">{contact.name}</span>
                       <a href={`tel:${contact.phone.replace(/\s+/g, '')}`} className="text-red-500 font-bold hover:underline">
                         {contact.phone}
                       </a>
@@ -232,11 +243,11 @@ export const EventModal: React.FC<Props> = ({ event, isOpen, onClose, onRegister
               </div>
             )}
 
-            {/* Register CTA */}
-            <div className="pt-2">
+            {/* Register CTA with explicit Top Margin */}
+            <div className="pt-4 pb-2">
               <button
                 onClick={() => onRegister(event)}
-                className="bg-red-600 hover:bg-red-700 w-full py-3.5 text-white font-bold text-sm uppercase tracking-wider transition rounded"
+                className="bg-red-600 hover:bg-red-700 w-full py-4 text-white font-bold text-sm uppercase tracking-wider transition rounded-lg shadow-lg cursor-pointer"
               >
                 REGISTER NOW →
               </button>

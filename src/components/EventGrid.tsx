@@ -9,7 +9,7 @@ interface Props {
 
 const EventGrid: React.FC<Props> = ({ events, onSelectEvent }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 max-w-7xl mx-auto px-2">
       {events.map((event, index) => (
         <EventCard
           key={event.id}
