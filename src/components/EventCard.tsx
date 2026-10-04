@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import type { EventData } from '../types/event';
 
 interface Props {
@@ -7,48 +8,71 @@ interface Props {
   onSelect: (event: EventData) => void;
 }
 
-const EventCard: React.FC<Props> = ({ event, onSelect }) => {
+const EventCard: React.FC<Props> = ({ event, index, onSelect }) => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.06 }}
+      whileHover={{ y: -10, scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
       onClick={() => onSelect(event)}
-      className="group cursor-pointer transition border border-gray-700 bg-black flex flex-col justify-between h-full"
+      className="group cursor-pointer metallic-card rounded-md overflow-hidden flex flex-col justify-between h-full transform transition-all duration-300"
     >
-      {/* Image Header matching reference */}
-      <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden bg-gray-900">
-        {event.image ? (
-          <img
-            alt={event.name}
-            src={event.image}
-            className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-            loading="lazy"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4">
-            <span className="text-xl font-bold text-white text-center uppercase tracking-wider">{event.name}</span>
+      {/* Real Photography Header */}
+      <div className="relative h-56 sm:h-60 md:h-64 overflow-hidden bg-black">
+        <img
+          alt={event.name}
+          src={event.image}
+          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+          loading="lazy"
+        />
+        {/* Metallic Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a0c] via-transparent to-black/40 opacity-80" />
+
+        {/* Category Pill Badge */}
+        <div className="absolute top-3 left-3 z-10">
+          <span className="text-[10px] font-extrabold uppercase tracking-widest bg-black/80 text-[#f43f5e] border border-[#e11d48]/40 px-3 py-1 rounded-full shadow-md backdrop-blur-sm">
+            {event.category}
+          </span>
+        </div>
+
+        {/* Online / Offline Mode Badge */}
+        {event.mode && (
+          <div className="absolute top-3 right-3 z-10">
+            <span className={`text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm ${
+              event.mode.toUpperCase() === 'ONLINE'
+                ? 'bg-blue-950/80 text-blue-400 border border-blue-500/50'
+                : 'bg-emerald-950/80 text-emerald-400 border border-emerald-500/50'
+            }`}>
+              {event.mode}
+            </span>
           </div>
         )}
       </div>
 
-      {/* Card Content Area matching reference */}
-      <div className="p-4 sm:p-5 md:p-6 bg-black flex flex-col flex-1 justify-between">
+      {/* Metallic Content Area */}
+      <div className="p-5 sm:p-6 bg-[#0f0a0c] flex flex-col flex-1 justify-between">
         <div>
-          <h3 className="text-lg sm:text-xl font-bold text-white mb-2 md:mb-3">{event.name}</h3>
-          <p className="text-gray-400 text-xs sm:text-sm mb-3 md:mb-4 leading-relaxed line-clamp-3">
+          <h3 className="text-xl sm:text-2xl font-black text-white mb-2 font-['Syne',sans-serif] tracking-tight group-hover:text-red-400 transition-colors">
+            {event.name}
+          </h3>
+          <p className="text-gray-400 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-3 font-normal font-['Space_Grotesk',sans-serif]">
             {event.description}
           </p>
         </div>
 
         <div>
-          {/* Red Line Divider matching reference */}
-          <div className="h-px bg-red-600 mb-3 md:mb-4" />
+          {/* Metallic Red Line Divider */}
+          <div className="h-[2px] bg-gradient-to-r from-[#e11d48] via-[#be123c] to-transparent mb-4" />
 
-          {/* Bottom Row matching reference */}
+          {/* Bottom Action Row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
             <div>
-              <p className="text-[10px] sm:text-xs text-gray-500 mb-0.5 font-semibold uppercase tracking-wider">
+              <p className="text-[10px] text-gray-500 mb-0.5 font-bold uppercase tracking-widest">
                 {event.mode ? 'FORMAT' : 'CATEGORY'}
               </p>
-              <p className="text-red-600 font-bold text-xs sm:text-sm md:text-base uppercase tracking-wide">
+              <p className="text-[#f43f5e] font-extrabold text-xs sm:text-sm uppercase tracking-wider">
                 {event.mode || event.category}
               </p>
             </div>
@@ -58,14 +82,14 @@ const EventCard: React.FC<Props> = ({ event, onSelect }) => {
                 e.stopPropagation();
                 onSelect(event);
               }}
-              className="bg-red-600 px-4 sm:px-6 py-2 text-white font-bold text-xs sm:text-sm hover:bg-red-700 transition w-full sm:w-auto"
+              className="btn-metallic px-5 py-2.5 text-white font-extrabold text-xs tracking-widest uppercase rounded-sm w-full sm:w-auto flex items-center justify-center gap-1.5"
             >
               REGISTER →
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

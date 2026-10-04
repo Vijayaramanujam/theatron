@@ -1,16 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 :root {
-  --background: #0a0a0a;
-  --surface: #141414;
-  --surface-hover: #1a1a1a;
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1a1;
-  --accent: #dc2626;
-  --accent-hover: #ef4444;
-  --border: #1f1f1f;
-  --muted: #737373;
+  --background: #050505;
+  --surface: #0f0a0c;
+  --metallic-red: #e11d48;
+  --metallic-red-dark: #800020;
+  --metallic-red-glow: rgba(225, 29, 72, 0.4);
 }
 
 * {
@@ -26,31 +22,57 @@ html {
 body {
   font-family: 'Space Grotesk', sans-serif;
   background-color: var(--background);
-  color: var(--text-primary);
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+h1, h2, h3, h4, .font-display {
+  font-family: 'Syne', sans-serif;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--background);
+/* Metallic Red Text Gradient */
+.text-metallic-red {
+  background: linear-gradient(135deg, #ffffff 0%, #f43f5e 40%, #e11d48 70%, #9f1239 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
+.text-metallic-shine {
+  background: linear-gradient(90deg, #e11d48 0%, #fda4af 50%, #e11d48 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s linear infinite;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--muted);
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
 }
 
-/* Selection */
-::selection {
-  background-color: rgba(220, 38, 38, 0.3);
-  color: white;
+/* Metallic Red Glass Card Border & Glow */
+.metallic-card {
+  background: linear-gradient(180deg, #12090b 0%, #050505 100%);
+  border: 1px solid rgba(225, 29, 72, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.metallic-card:hover {
+  border-color: rgba(225, 29, 72, 0.7);
+  box-shadow: 0 10px 30px rgba(225, 29, 72, 0.35), 0 0 15px rgba(225, 29, 72, 0.2);
+}
+
+/* Metallic Red Button */
+.btn-metallic {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 50%, #800020 100%);
+  box-shadow: 0 4px 15px rgba(225, 29, 72, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-metallic:hover {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 50%, #9f1239 100%);
+  box-shadow: 0 6px 25px rgba(225, 29, 72, 0.6);
+  transform: translateY(-2px);
 }

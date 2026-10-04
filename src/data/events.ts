@@ -14,8 +14,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    image: '/images/events/quiz-corn.svg',
-    gradient: 'from-amber-950/40 via-red-950/20 to-black'
+    image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#800020]/60 via-black to-black'
   },
   {
     id: 'stills-of-soul',
@@ -40,8 +40,8 @@ export const events: EventData[] = [
         }
       ]
     },
-    image: '/images/events/stills-of-soul.svg',
-    gradient: 'from-red-950/50 via-neutral-900 to-black'
+    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#be123c]/60 via-black to-black'
   },
   {
     id: 'graphics-grid',
@@ -67,8 +67,8 @@ export const events: EventData[] = [
         }
       ]
     },
-    image: '/images/events/graphics-grid.svg',
-    gradient: 'from-blue-950/40 via-purple-950/20 to-black'
+    image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#9f1239]/60 via-black to-black'
   },
   {
     id: 'cineplus',
@@ -93,8 +93,8 @@ export const events: EventData[] = [
         }
       ]
     },
-    image: '/images/events/cineplus.svg',
-    gradient: 'from-amber-950/40 via-red-950/30 to-black'
+    image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#e11d48]/60 via-black to-black'
   },
   {
     id: 'stage-play',
@@ -110,8 +110,8 @@ export const events: EventData[] = [
       teamBased: true,
       teamSize: { min: 1, max: 10 }
     },
-    image: '/images/events/stage-play.svg',
-    gradient: 'from-red-950/50 via-zinc-900 to-black'
+    image: 'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#800020]/60 via-black to-black'
   },
   {
     id: 'adaptune',
@@ -126,8 +126,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    image: '/images/events/adaptune.svg',
-    gradient: 'from-pink-950/40 via-purple-950/20 to-black'
+    image: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#f43f5e]/60 via-black to-black'
   },
   {
     id: 'brainstorm',
@@ -142,8 +142,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    image: '/images/events/brainstorm.svg',
-    gradient: 'from-emerald-950/40 via-teal-950/20 to-black'
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#9f1239]/60 via-black to-black'
   },
   {
     id: 'debate',
@@ -159,8 +159,8 @@ export const events: EventData[] = [
       teamBased: true,
       teamSize: { min: 2, max: 4, fixed: [2, 3, 4] }
     },
-    image: '/images/events/debate.svg',
-    gradient: 'from-cyan-950/40 via-slate-900 to-black'
+    image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#be123c]/60 via-black to-black'
   },
   {
     id: 'photography-workshop',
@@ -174,8 +174,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    image: '/images/workshops/photography.svg',
-    gradient: 'from-neutral-900 via-stone-900 to-black'
+    image: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#800020]/60 via-black to-black'
   },
   {
     id: 'vfx-and-editing',
@@ -189,8 +189,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    image: '/images/workshops/vfx-editing.svg',
-    gradient: 'from-indigo-950/40 via-purple-950/20 to-black'
+    image: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#e11d48]/60 via-black to-black'
   },
   {
     id: 'dance-workshop',
@@ -202,8 +202,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    image: '/images/workshops/dance.svg',
-    gradient: 'from-rose-950/40 via-pink-950/20 to-black'
+    image: 'https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#f43f5e]/60 via-black to-black'
   },
   {
     id: 'script-writing',
@@ -218,8 +218,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    image: '/images/workshops/script-writing.svg',
-    gradient: 'from-amber-950/40 via-yellow-950/20 to-black'
+    image: 'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#9f1239]/60 via-black to-black'
   },
   {
     id: 'storyboard',
@@ -234,8 +234,8 @@ export const events: EventData[] = [
       commonFields: true,
       teamBased: false
     },
-    image: '/images/workshops/storyboard.svg',
-    gradient: 'from-teal-950/40 via-emerald-950/20 to-black'
+    image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=1200&q=80',
+    gradient: 'from-[#be123c]/60 via-black to-black'
   }
 ];
 
